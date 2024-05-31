@@ -35,7 +35,7 @@ def click_settings_option(context):
 @when('Click on Subscription & payments option')
 def click_subscription_and_payments(context):
     context.app.sign_in_page.click_subscription_and_payments(context)
-
+    sleep(6)
 
 @then('Verify title Subscription & payments is visible')
 def verify_subscription_and_payments_text(context):
