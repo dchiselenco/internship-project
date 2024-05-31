@@ -30,7 +30,7 @@ def click_continue(context):
 @then('Click on Settings option')
 def click_settings_option(context):
     context.app.sign_in_page.click_settings_option(context)
-
+    sleep(6)
 
 @when('Click on Subscription & payments option')
 def click_subscription_and_payments(context):
