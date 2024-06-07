@@ -6,6 +6,10 @@ from selenium.webdriver.support.wait import WebDriverWait
 
 from app.application import Application
 
+#  Run Behave tests with Allure results; it will run all the test from feature folder and stored in test_results file
+# behave -f allure_behave.formatter:AllureFormatter -o test_results/ features/
+
+
 def browser_init(context, scenario_name):
     """
     Initialize the browser driver.
