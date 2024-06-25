@@ -53,3 +53,8 @@ def verify_back_button_available(context):
 @then('Verify  upgrade plan button is available')
 def verify_upgrade_plan_available(context):
     context.app.sign_in_page.verify_upgrade_plan_available()
+
+
+@then('Verify user name is visible')
+def verify_user_name_is_visible(context):
+    context.app.sign_in_page.verify_user_name_is_visible()
