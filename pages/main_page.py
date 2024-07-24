@@ -17,6 +17,8 @@ class MainPage(Page):
     def open_main(self):
         self.driver.get('https://soft.reelly.io/sign-up')
 
-
-    def click_sign_in(self,context):
+    def click_sign_in(self, context):
         self.wait_until_clickable(*self.SIGN_IN)
+
+
+

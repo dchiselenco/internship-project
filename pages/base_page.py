@@ -31,6 +31,13 @@ class Page:
         self.driver.find_element(*locator).send_keys(text)
 
 
+    def get_current_window(self):
+        current_window = self.driver.current_window_handle
+        print('Current:',  current_window)
+        print('All windows:', self.driver.windows_handles)
+        return current_window
+
+
     def wait_until_clickable(self, *locator):
         self.wait.until(
         EC.element_to_be_clickable(locator),
