@@ -9,11 +9,14 @@ from selenium.common.exceptions import TimeoutException
 
 
 class ConnectCompanyPage(BasePage):
+
+    CONNECT_BUTTON = (By.XPATH, "//*[text()='Connect the company']")
+
     def __init__(self, driver):
         super().__init__(driver)
 
     def click_connect_company(self):
-        connect_button = self.find_element(By.XPATH, "//*[text()='Connect the company']")
+        connect_button = self.find_element(*self.CONNECT_BUTTON)
         connect_button.click()
 
     def switch_to_new_window(self):

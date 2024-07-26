@@ -5,10 +5,10 @@ from time import sleep
 
 class SettingsPage(BasePage):
     EDIT_BTN = (By.XPATH, "//div[text()='Edit profile']")
+    CLOSE_BTN = (By.CSS_SELECTOR, 'a.close-button')
+    COMPANY_INPUT = (By.CSS_SELECTOR, 'input#Company-name')
     NAME_INPUT = (By.CSS_SELECTOR, 'input[name="Fullname"]')
     NUMBER_INPUT = (By.CSS_SELECTOR, 'input#number')
-    COMPANY_INPUT = (By.CSS_SELECTOR, 'input#Company-name')
-    CLOSE_BTN = (By.CSS_SELECTOR, 'a.close-button')
     SAVE_BTN = (By.CSS_SELECTOR, 'div.save-changes-button')
 
     def click_edit_profile_btn(self):
