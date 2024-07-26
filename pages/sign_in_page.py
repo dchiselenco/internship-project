@@ -1,4 +1,4 @@
-from pages.base_page import Page
+from pages.base_page import BasePage
 from selenium.webdriver.common.by import By
 from selenium import webdriver
 
@@ -8,7 +8,7 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import TimeoutException
 
 
-class SigninPage(Page):
+class SigninPage(BasePage):
     BACK_TXT = (By.XPATH, '//div[text()="Back"]')
     CONTINUE_BTN = (By.XPATH, "//a[text()='Continue']")
     PASSWORD_TEXT = (By.CSS_SELECTOR, 'input[type="password"]')
@@ -16,7 +16,8 @@ class SigninPage(Page):
     SUBSCRIPTION_AND_PAYMENT = (By.CSS_SELECTOR, 'a.page-setting-block[href="/subscription"]')
     SUBSCRIPTION_AND_PAYMENT_TXT = (By.XPATH, "//div[text()='Subscription & payments']")
     UPGRADE_PLAN_BTN = (By.XPATH, "//div[text()='Upgrade plan']")
-    USER_NAME = (By.XPATH,'//div[@wized="userName" and @class="name_text_account" and @w-el-text="Name Surname" and text()="Daniela Chiselenco"]')
+    USER_NAME = (By.XPATH,
+                 '//div[@wized="userName" and @class="name_text_account" and @w-el-text="Name Surname" and text()="Daniela Chiselenco"]')
     EMAIL_TEXT = (By.CSS_SELECTOR, 'input[type="email"]')
 
     EMAIL = "dchiselenco@gmail.com"

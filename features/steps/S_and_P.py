@@ -18,7 +18,6 @@ def store_original_window(context):
     context.original_window = context.app.connect_company_page.get_current_window()
 
 
-
 @then('Input email')
 def input_email(context):
     context.email = context.app.sign_in_page.EMAIL
@@ -29,7 +28,6 @@ def input_email(context):
 def input_password(context):
     context.password = context.app.sign_in_page.PASSWORD
     context.app.sign_in_page.input_password()
-
 
 
 @then('Click on Continue button')

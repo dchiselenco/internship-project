@@ -1,6 +1,5 @@
 from selenium.webdriver.common.by import By
-from pages.base_page import Page
-
+from pages.base_page import BasePage
 
 from selenium import webdriver
 
@@ -9,10 +8,9 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import TimeoutException
 
-class MainPage(Page):
+
+class MainPage(BasePage):
     SIGN_IN = (By.CSS_SELECTOR, 'div[wized="signinButtonSignup"].sing-in-text')
-
-
 
     def open_main(self):
         self.driver.get('https://soft.reelly.io/sign-up')
@@ -20,5 +18,5 @@ class MainPage(Page):
     def click_sign_in(self, context):
         self.wait_until_clickable(*self.SIGN_IN)
 
-
-
+    def clear(self, *locator):
+        self.driver.find_element(*locator).clear()

@@ -15,7 +15,6 @@ def switch_to_new_tab(context):
     sleep(3)
 
 
-
 @when('Verify the right tab opens')
 def verify_right_tab_opens(context):
     context.app.connect_company_page.verify_right_tab_opens()
