@@ -11,7 +11,7 @@ from selenium.common.exceptions import TimeoutException
 class ConnectCompanyPage(BasePage):
 
     CONNECT_BUTTON = (By.XPATH, "//*[text()='Connect the company']")
-
+    TEXT_LOCATOR = (By.XPATH, "//div[text()='Get details about Reelly corporate offer']")
     def __init__(self, driver):
         super().__init__(driver)
 
@@ -27,5 +27,5 @@ class ConnectCompanyPage(BasePage):
         self.driver.switch_to.window(all_windows[1])
 
     def verify_right_tab_opens(self):
-        actual_text = self.find_element(By.XPATH, "//div[text()='Get details about Reelly corporate offer']").text
+        actual_text = self.find_element(*self.TEXT_LOCATOR).text
         assert "Get details about Reelly corporate offer" in actual_text, f'Error! Text "Get details about Reelly corporate offer" not in {actual_text}'

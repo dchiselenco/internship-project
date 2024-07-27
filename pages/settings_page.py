@@ -4,9 +4,10 @@ from time import sleep
 
 
 class SettingsPage(BasePage):
-    EDIT_BTN = (By.XPATH, "//div[text()='Edit profile']")
+    ADD_PROJECT = (By.XPATH, "//div[contains(text(), 'Add a project')]")
     CLOSE_BTN = (By.CSS_SELECTOR, 'a.close-button')
     COMPANY_INPUT = (By.CSS_SELECTOR, 'input#Company-name')
+    EDIT_BTN = (By.XPATH, "//div[text()='Edit profile']")
     NAME_INPUT = (By.CSS_SELECTOR, 'input[name="Fullname"]')
     NUMBER_INPUT = (By.CSS_SELECTOR, 'input#number')
     SAVE_BTN = (By.CSS_SELECTOR, 'div.save-changes-button')
@@ -58,3 +59,6 @@ class SettingsPage(BasePage):
         actual_text = self.driver.find_element(*self.COMPANY_INPUT).get_attribute('value')
         expected_result = 'test1'
         assert expected_result in actual_text, f'Error: Text not in {actual_text}'
+
+    def click_add_project(self):
+        self.click(*self.ADD_PROJECT)
