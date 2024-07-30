@@ -17,3 +17,14 @@ Feature: Feature: Editing on Settings Page
     Then Verify the right information is present in the company input field
     When Check “Save Changes” button is available and clickable
     When Check “Close” button is available and clickable
+
+  Scenario: User can open the community page
+    Given Open the main page
+    And Click Sign in
+    Then Input email
+    And Input password
+    And Click on Continue button
+    And Click on Settings option
+    When Click on Community option
+    And Verify the right Community page open
+    And Verify “Contact support” button is available and clickable

@@ -17,8 +17,6 @@ class MainPage(BasePage):
     SIGN_IN = (By.CSS_SELECTOR, 'div[wized="signinButtonSignup"].sing-in-text')
     TEXT = (By.CSS_SELECTOR, '.h1-menu')
 
-
-
     def open_main(self):
         self.driver.get('https://soft.reelly.io/sign-up')
 
@@ -27,7 +25,6 @@ class MainPage(BasePage):
 
     def clear(self, *locator):
         self.driver.find_element(*locator).clear()
-
 
     def click_on_main_menu(self):
         self.click(*self.MAIN_MENU)
@@ -40,7 +37,6 @@ class MainPage(BasePage):
         actions.move_by_offset(0, 25)
         actions.click()
         actions.perform()
-
 
     def verify_language(self):
         self.verify_text('Главное меню', *self.TEXT)

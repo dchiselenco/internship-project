@@ -15,7 +15,6 @@ Feature: Relly app
     And Verify  upgrade plan button is available
 
 
-
   Scenario: The user name is visible when log in
     Given Open the main page
     And Click Sign in
@@ -23,7 +22,6 @@ Feature: Relly app
     And Input password
     And Click on Continue button
     And Verify user name is visible
-
 
 
   Scenario: The user can enter the information into the input fields on the registration page

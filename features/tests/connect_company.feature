@@ -12,3 +12,4 @@ Feature: Relly app
     When Click on Connect the company button
     And Switch to the new tab
     And Verify the right tab opens
+

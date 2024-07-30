@@ -1,12 +1,15 @@
 from pages.base_page import BasePage
 from selenium.webdriver.common.by import By
 from time import sleep
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.support.ui import WebDriverWait
 
 
 class SettingsPage(BasePage):
     ADD_PROJECT = (By.XPATH, "//div[contains(text(), 'Add a project')]")
     CLOSE_BTN = (By.CSS_SELECTOR, 'a.close-button')
     COMPANY_INPUT = (By.CSS_SELECTOR, 'input#Company-name')
+    COMMUNITY_BTN = (By.XPATH, "//div[@class='setting-text' and text()='Community']")
     EDIT_BTN = (By.XPATH, "//div[text()='Edit profile']")
     NAME_INPUT = (By.CSS_SELECTOR, 'input[name="Fullname"]')
     NUMBER_INPUT = (By.CSS_SELECTOR, 'input#number')
@@ -14,6 +17,10 @@ class SettingsPage(BasePage):
 
     def click_edit_profile_btn(self):
         self.click(*self.EDIT_BTN)
+        sleep(3)
+
+    def click_community_btn(self):
+        self.click(*self.COMMUNITY_BTN)
         sleep(3)
 
     def click_save_btn(self):

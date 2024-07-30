@@ -8,6 +8,11 @@ def click_edit_profile_btn(context):
     context.app.settings_page.click_edit_profile_btn()
 
 
+@when('Click on Community option')
+def click_community_btn(context):
+    context.app.settings_page.click_community_btn()
+
+
 @when('Enter test data into the name field: {name}')
 def input_name(context, name):
     context.app.settings_page.input_name(name)

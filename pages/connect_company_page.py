@@ -9,9 +9,9 @@ from selenium.common.exceptions import TimeoutException
 
 
 class ConnectCompanyPage(BasePage):
-
     CONNECT_BUTTON = (By.XPATH, "//*[text()='Connect the company']")
     TEXT_LOCATOR = (By.XPATH, "//div[text()='Get details about Reelly corporate offer']")
+
     def __init__(self, driver):
         super().__init__(driver)
 
