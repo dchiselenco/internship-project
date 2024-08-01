@@ -21,6 +21,9 @@ def input_project_info(context):
 
 @then('Verify the right information is present in the input field')
 def input_field_verification(context):
+    # expected_email = "dchiselenco@gmail.com"
+    # expected_name = "Daniela C"
+    # expected_company = "test2"
     context.app.add_project_page.input_field_verification()
     sleep(3)
 
