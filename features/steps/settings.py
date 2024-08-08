@@ -38,6 +38,11 @@ def verify_new_num(context):
     context.app.settings_page.verify_new_number()
 
 
+@then('Click on "Contact us" button')
+def click_contact_us(context):
+    context.app.settings_page.click_contact_us()
+
+
 @then('Verify the right information is present in the company input field')
 def verify_new_company(context):
     context.app.settings_page.verify_new_company()

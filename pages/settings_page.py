@@ -10,10 +10,12 @@ class SettingsPage(BasePage):
     CLOSE_BTN = (By.CSS_SELECTOR, 'a.close-button')
     COMPANY_INPUT = (By.CSS_SELECTOR, 'input#Company-name')
     COMMUNITY_BTN = (By.XPATH, "//div[@class='setting-text' and text()='Community']")
+    CONTACT_US_BTN = (By.XPATH, '//div[@class="setting-text" and text()="Contact us"]')
     EDIT_BTN = (By.XPATH, "//div[text()='Edit profile']")
     NAME_INPUT = (By.CSS_SELECTOR, 'input[name="Fullname"]')
     NUMBER_INPUT = (By.CSS_SELECTOR, 'input#number')
     SAVE_BTN = (By.CSS_SELECTOR, 'div.save-changes-button')
+
 
     def click_edit_profile_btn(self):
         self.click(*self.EDIT_BTN)
@@ -69,3 +71,7 @@ class SettingsPage(BasePage):
 
     def click_add_project(self):
         self.click(*self.ADD_PROJECT)
+
+    def click_contact_us(self):
+        self.click(*self.CONTACT_US_BTN)
+
