@@ -76,30 +76,30 @@ class SettingsPage(BasePage):
     def click_contact_us(self):
         self.click(*self.CONTACT_US_BTN)
 
-    # def click_user_guide(self):
-    #     self.click(*self.USER_GUIDE_BUTTON)
+    def click_user_guide(self):
+        self.click(*self.USER_GUIDE_BUTTON)
 
     # def click_user_guide(self, context):
     #     self.wait_until_clickable(*self.USER_GUIDE_BUTTON)
 
-    def click_user_guide(self):
-        # Optional: Wait for the entire page to be fully loaded
-        WebDriverWait(self.driver, 30).until(
-            lambda driver: driver.execute_script('return document.readyState') == 'complete'
-        )
-
-        # Wait until the user guide button is visible
-        user_guide_button = WebDriverWait(self.driver, 30).until(
-            EC.visibility_of_element_located(self.USER_GUIDE_BUTTON)
-        )
-
-        # Scroll the element into view
-        self.driver.execute_script("arguments[0].scrollIntoView(true);", user_guide_button)
-
-        # Ensure it's clickable
-        WebDriverWait(self.driver, 10).until(
-            EC.element_to_be_clickable(self.USER_GUIDE_BUTTON)
-        )
-
-        # Click the element
-        user_guide_button.click()
+    # def click_user_guide(self):
+    #     # Optional: Wait for the entire page to be fully loaded
+    #     WebDriverWait(self.driver, 30).until(
+    #         lambda driver: driver.execute_script('return document.readyState') == 'complete'
+    #     )
+    #
+    #     # Wait until the user guide button is visible
+    #     user_guide_button = WebDriverWait(self.driver, 30).until(
+    #         EC.visibility_of_element_located(self.USER_GUIDE_BUTTON)
+    #     )
+    #
+    #     # Scroll the element into view
+    #     self.driver.execute_script("arguments[0].scrollIntoView(true);", user_guide_button)
+    #
+    #     # Ensure it's clickable
+    #     WebDriverWait(self.driver, 10).until(
+    #         EC.element_to_be_clickable(self.USER_GUIDE_BUTTON)
+    #     )
+    #
+    #     # Click the element
+    #     user_guide_button.click()
