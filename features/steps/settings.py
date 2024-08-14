@@ -56,3 +56,21 @@ def click_save_btn(context):
 @when('Check “Close” button is available and clickable')
 def click_close_btn(context):
     context.app.settings_page.click_close_btn()
+
+
+@then('Click on User Guide button')
+def click_user_guide(context):
+    context.app.settings_page.click_user_guide()
+
+
+
+
+
+
+
+
+
+
+
+
+

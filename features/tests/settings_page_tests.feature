@@ -74,3 +74,20 @@ Feature: Settings test cases
     Then Verify that URL of window contains contact-us
     And Verify there are at least 4 social media icons
     And Verify “Connect the company” button is available and clickable
+
+
+  Scenario: User can open User guide page
+    Given Open the main page
+    Given Open the main page
+    And Click Sign in
+    Then Input email
+    And Input password
+    And Click on Continue button
+    And Click on Settings option
+    And Click on User Guide button
+    Then Verify that URL  contains user-guide
+    And Verify all lesson videos contain titles
+
+
+
+
