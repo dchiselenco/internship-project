@@ -16,9 +16,9 @@ class SigninPage(BasePage):
     SETTINGS_OPTION = (By.XPATH, "//div[text()='Settings']")
     SUBSCRIPTION_AND_PAYMENT = (By.CSS_SELECTOR, 'a.page-setting-block[href="/subscription"]')
     SUBSCRIPTION_AND_PAYMENT_TXT = (By.XPATH, "//div[text()='Subscription & payments']")
-    UPGRADE_PLAN_BTN = (By.XPATH, "//div[text()='Upgrade plan']")
-    USER_NAME = (By.XPATH,
-                 '//div[@wized="userName" and @class="name_text_account" and @w-el-text="Name Surname" and text()="Daniela Chiselenco"]')
+    UPGRADE_PLAN_BTN = (By.XPATH, '//div[text()=\'Upgrade plan\']')
+    USER_NAME = (By.XPATH, '//div[@wized="userName" and @class="name_text_account" and @w-el-text="Name Surname" and '
+                           'text()="Dany C"]')
 
     EMAIL = "dchiselenco@gmail.com"
     PASSWORD = "Qwaszx!234"
@@ -70,4 +70,4 @@ class SigninPage(BasePage):
         self.verify_text('Upgrade plan', *self.UPGRADE_PLAN_BTN)
 
     def verify_user_name_is_visible(self):
-        self.verify_text('Daniela Chiselenco', *self.USER_NAME)
+        self.verify_text('Dany C', *self.USER_NAME)

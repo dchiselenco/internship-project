@@ -2,7 +2,6 @@
 Feature:  Tests for Main page
 
    Scenario: The user name is visible when log in
-
     Given Open the main page
     And Click Sign in
     Then Input email
@@ -12,10 +11,7 @@ Feature:  Tests for Main page
 
 
 
-
   Scenario: Verify the user can change the language from the page
-
-
     Given Open the main page
     And Click Sign in
     Then Input email
@@ -24,8 +20,6 @@ Feature:  Tests for Main page
     When Click on menu
     And Change the language
     Then Verify the language has changed
-
-
 
 
 

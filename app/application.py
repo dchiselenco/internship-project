@@ -1,5 +1,6 @@
 from pages.add_project_page import AddProject
 from pages.base_page import BasePage
+from pages.change_password_page import ChangePassword
 from pages.community_page import CommunityPage
 from pages.contact_us_page import ContactUsPage
 from pages.connect_company_page import ConnectCompanyPage
@@ -13,6 +14,7 @@ class Application:
     def __init__(self, driver):
         self.add_project_page = AddProject(driver)
         self.base_page = BasePage(driver)
+        self.change_password_page = ChangePassword(driver)
         self.community_page = CommunityPage(driver)
         self.connect_company_page = ConnectCompanyPage(driver)
         self.contact_us_page = ContactUsPage(driver)

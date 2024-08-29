@@ -89,5 +89,16 @@ Feature: Settings test cases
     And Verify all lesson videos contain titles
 
 
-
+  Scenario: User can open change password page
+    Given Open the main page
+    Given Open the main page
+    And Click Sign in
+    Then Input email
+    And Input password
+    And Click on Continue button
+    And Click on Settings option
+    And Click on Change password option
+    And Verify that URL of window contains set-new-password
+    And Add some test password to the input fields
+    And Verify the “Change password” button is available
 

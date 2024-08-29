@@ -6,7 +6,7 @@ from selenium.webdriver.support.wait import WebDriverWait
 
 class ContactUsPage(BasePage):
     CONNECT_COMPANY = (By.XPATH, '//div[text()="Connect the company"]')
-    SOCIAL_MEDIA_ICONS = (By.CSS_SELECTOR, '.text-social')
+    SOCIAL_MEDIA_ICONS = (By.CSS_SELECTOR, "div.text-social")
 
     def verify_url_contains_contact_us(self, expected_partial_url='contact-us'):
         self.wait.until(EC.url_contains(expected_partial_url),
@@ -25,3 +25,5 @@ class ContactUsPage(BasePage):
         all_social = self.find_elements(*self.SOCIAL_MEDIA_ICONS)
         print(f'How many SOCIAL on the page?: {len(all_social)}')
         assert len(all_social) >= int(number), f'Error! Expected {number}, but got {len(all_social)}'
+
+

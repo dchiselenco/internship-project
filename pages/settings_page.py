@@ -7,6 +7,7 @@ from selenium.webdriver.support.ui import WebDriverWait
 
 class SettingsPage(BasePage):
     ADD_PROJECT = (By.XPATH, "//div[contains(text(), 'Add a project')]")
+    CHANGE_PASSWORD_BUTTON = (By.XPATH, "//div[@class='setting-text' and text()='Change password']")
     CLOSE_BTN = (By.CSS_SELECTOR, 'a.close-button')
     COMPANY_INPUT = (By.CSS_SELECTOR, 'input#Company-name')
     COMMUNITY_BTN = (By.XPATH, "//div[@class='setting-text' and text()='Community']")
@@ -28,32 +29,32 @@ class SettingsPage(BasePage):
 
     def click_save_btn(self):
         self.click(*self.SAVE_BTN)
-        sleep(3)
+
 
     def click_close_btn(self):
         self.click(*self.CLOSE_BTN)
-        sleep(3)
+
 
     def input_name(self, name):
         input_fname = self.find_element(*self.NAME_INPUT)
         input_fname.clear()
         # self.clear()
         self.input_text(name, *self.NAME_INPUT)
-        sleep(2)
+
 
     def input_number(self, number):
         input_number = self.find_element(*self.NUMBER_INPUT)
         input_number.clear()
         # self.clear()
         self.input_text(number, *self.NUMBER_INPUT)
-        sleep(2)
+
 
     def input_company(self, test):
         input_company = self.find_element(*self.COMPANY_INPUT)
         input_company.clear()
         # self.clear()
         self.input_text(test, *self.COMPANY_INPUT)
-        sleep(2)
+
 
     def verify_new_name(self):
         actual_text = self.driver.find_element(By.CSS_SELECTOR, 'input[name="Fullname"]').get_attribute('value')
@@ -72,6 +73,9 @@ class SettingsPage(BasePage):
 
     def click_add_project(self):
         self.click(*self.ADD_PROJECT)
+
+    def click_change_password(self):
+        self.click(*self.CHANGE_PASSWORD_BUTTON)
 
     def click_contact_us(self):
         self.click(*self.CONTACT_US_BTN)
@@ -100,6 +104,3 @@ class SettingsPage(BasePage):
     #     WebDriverWait(self.driver, 10).until(
     #         EC.element_to_be_clickable(self.USER_GUIDE_BUTTON)
     #     )
-    #
-    #     # Click the element
-    #     user_guide_button.click()

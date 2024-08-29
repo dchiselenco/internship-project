@@ -63,14 +63,6 @@ def click_user_guide(context):
     context.app.settings_page.click_user_guide()
 
 
-
-
-
-
-
-
-
-
-
-
-
+@then('Click on Change password option')
+def click_change_password(context):
+    context.app.settings_page.click_change_password()
