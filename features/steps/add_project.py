@@ -16,7 +16,7 @@ def verify_right_page_opens(context):
 @then('Add test information to the input fields')
 def input_project_info(context):
     context.app.add_project_page.input_project_info()
-    sleep(3)
+
 
 
 @then('Verify the right information is present in the input field')
@@ -25,10 +25,10 @@ def input_field_verification(context):
     # expected_name = "Daniela C"
     # expected_company = "test2"
     context.app.add_project_page.input_field_verification()
-    sleep(3)
+
 
 
 @then('Verify Send an Application button is available and clickable')
 def send_application_button_verification(context):
     context.app.add_project_page.send_an_application_button_verification()
-    sleep(3)
+

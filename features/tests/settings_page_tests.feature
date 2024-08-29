@@ -64,7 +64,6 @@ Feature: Settings test cases
 
   Scenario: User can open the Contact us page
     Given Open the main page
-    Given Open the main page
     And Click Sign in
     Then Input email
     And Input password
@@ -78,7 +77,6 @@ Feature: Settings test cases
 
   Scenario: User can open User guide page
     Given Open the main page
-    Given Open the main page
     And Click Sign in
     Then Input email
     And Input password
@@ -90,7 +88,6 @@ Feature: Settings test cases
 
 
   Scenario: User can open change password page
-    Given Open the main page
     Given Open the main page
     And Click Sign in
     Then Input email
