@@ -57,6 +57,7 @@ Feature: Settings test cases
     And Click on Continue button
     And Click on Settings option
     When Click on Subscription & payments option
+    Then Verify that URL of window contains subscription
     Then Verify title Subscription & payments is visible
     And Verify Back button is available
     And Verify  upgrade plan button is available
