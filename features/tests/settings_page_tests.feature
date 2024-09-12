@@ -6,8 +6,7 @@ Feature: Settings test cases
 
     Given Open the main page
     And Click Sign in
-    Then Input email
-    And Input password
+    Then Input email and password
     And Click on Continue button
     And Click on Settings option
     Then Click on the Edit profile option
@@ -24,8 +23,7 @@ Feature: Settings test cases
 
     Given Open the main page
     And Click Sign in
-    Then Input email
-    And Input password
+    Then Input email and password
     And Click on Continue button
     And Click on Settings option
     When Click on Community option
@@ -37,8 +35,7 @@ Feature: Settings test cases
 
     Given Open the main page
     And Click Sign in
-    Then Input email
-    And Input password
+    Then Input email and password
     And Click on Continue button
     And Click on Settings option
     When Click on Add a project
@@ -52,8 +49,7 @@ Feature: Settings test cases
 
     Given Open the main page
     And Click Sign in
-    Then Input email
-    And Input password
+    Then Input email and password
     And Click on Continue button
     And Click on Settings option
     When Click on Subscription & payments option
@@ -66,8 +62,7 @@ Feature: Settings test cases
   Scenario: User can open the Contact us page
     Given Open the main page
     And Click Sign in
-    Then Input email
-    And Input password
+    Then Input email and password
     And Click on Continue button
     And Click on Settings option
     And Click on "Contact us" button
@@ -79,8 +74,7 @@ Feature: Settings test cases
   Scenario: User can open User guide page
     Given Open the main page
     And Click Sign in
-    Then Input email
-    And Input password
+    Then Input email and password
     And Click on Continue button
     And Click on Settings option
     And Click on User Guide button
@@ -91,12 +85,27 @@ Feature: Settings test cases
   Scenario: User can open change password page
     Given Open the main page
     And Click Sign in
-    Then Input email
-    And Input password
+    Then Input email and password
     And Click on Continue button
     And Click on Settings option
     And Click on Change password option
     And Verify that URL of window contains set-new-password
     And Add some test password to the input fields
     And Verify the “Change password” button is available
+
+
+  Scenario: User can access Whatsapp and Telegram communities
+    Given Open the main page
+    And Click Sign in
+    Then Input email and password
+    And Click on Continue button
+    And Click on Settings option
+    And Click on Support option
+    And Switch to Support windows
+    And Verify that URL of window contains api.whatsapp.com
+    And Go back to Settings page
+    And Click on News option
+    And Verify that URL of window contains t.me
+
+
 

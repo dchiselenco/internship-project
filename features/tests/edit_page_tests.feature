@@ -6,8 +6,7 @@ Feature: Edit test cases
 
     Given Open the main page
     And Click Sign in
-    Then Input email
-    And Input password
+    Then Input email and password
     And Click on Continue button
     And Click on Settings option
     Then Click on the Edit profile option

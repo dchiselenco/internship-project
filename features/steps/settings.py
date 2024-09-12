@@ -66,3 +66,13 @@ def click_user_guide(context):
 @then('Click on Change password option')
 def click_change_password(context):
     context.app.settings_page.click_change_password()
+
+
+@then('Click on Support option')
+def click_on_support(context):
+    context.app.settings_page.click_on_support()
+
+
+@then('Click on News option')
+def click_news(context):
+    context.app.settings_page.click_news()

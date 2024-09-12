@@ -6,8 +6,7 @@ Feature: Relly app
   Scenario: The user can enter the information into the input fields on the registration page
     Given Open the main page
     And Click Sign in
-    Then Input email
-    And Input password
+    Then Input email and password
     And Verify correct username is visible in email field
     And Verify correct password is present in password field
 

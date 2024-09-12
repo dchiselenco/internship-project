@@ -4,8 +4,7 @@ Feature:  Tests for Main page
    Scenario: The user name is visible when log in
     Given Open the main page
     And Click Sign in
-    Then Input email
-    And Input password
+    Then Input email and password
     And Click on Continue button
     And Verify user name is visible
 
@@ -14,8 +13,7 @@ Feature:  Tests for Main page
   Scenario: Verify the user can change the language from the page
     Given Open the main page
     And Click Sign in
-    Then Input email
-    And Input password
+    Then Input email and password
     And Click on Continue button
     When Click on menu
     And Change the language
@@ -27,8 +25,7 @@ Feature:  Tests for Main page
 
     Given Open the main page
     And Click Sign in
-    Then Input email
-    And Input password
+    Then Input email and password
     And Click on Continue button
     And Store original windows
     When Click on Connect the company button

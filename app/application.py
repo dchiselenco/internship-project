@@ -7,6 +7,7 @@ from pages.connect_company_page import ConnectCompanyPage
 from pages.main_page import MainPage
 from pages.settings_page import SettingsPage
 from pages.sign_in_page import SigninPage
+from pages.support_page import SupportPage
 from pages.user_guide_page import UserGuidePage
 
 
@@ -21,4 +22,5 @@ class Application:
         self.main_page = MainPage(driver)
         self.settings_page = SettingsPage(driver)
         self.sign_in_page = SigninPage(driver)
+        self.support_page = SupportPage(driver)
         self.user_guide_page = UserGuidePage(driver)

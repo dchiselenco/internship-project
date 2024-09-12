@@ -52,11 +52,6 @@ class BasePage:
             f'Element still visible by {locator}'
         )
 
-    def get_current_window(self):
-        current_window = self.driver.current_window_handle
-        print('Current:', current_window)
-        print('ALL windows:', self.driver.window_handles)
-        return current_window
 
     def switch_to_new_window(self):
         self.wait.until(EC.new_window_is_opened)
@@ -80,7 +75,7 @@ class BasePage:
     def verify_partial_url(self, expected_partial_url):
         self.wait.until(EC.url_contains(expected_partial_url), message=f'URL does not contain {expected_partial_url}')
 
-    def verify__url(self, expected_url):
+    def verify_url(self, expected_url):
         self.wait.until(EC.url_matches(expected_url), message=f'URL does not contain {expected_url}')
 
     def save_screenshot(self, name):
