@@ -3,6 +3,11 @@ from behave import given, when, then
 from time import sleep
 
 
+@then('Verify there are {number} options for the settings')
+def verify_number_of_options(context, number):
+    context.app.settings_page.verify_number_of_options(number)
+
+
 @then('Click on the Edit profile option')
 def click_edit_profile_btn(context):
     context.app.settings_page.click_edit_profile_btn()

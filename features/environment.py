@@ -17,26 +17,27 @@ def browser_init(context, scenario_name):
     :param scenario_name: The name of the current scenario
     """
 
-    # BrowserStack credentials
-    bs_user = 'danielachiselenc_VWo7fR'
-    bs_key = 'LQ9LBkxj9w7egjACmDQa'
-    url = f'http://{bs_user}:{bs_key}@hub-cloud.browserstack.com/wd/hub'
+    # # BrowserStack credentials ##
+    # bs_user = 'danielachiselenc_VWo7fR'
+    # bs_key = 'LQ9LBkxj9w7egjACmDQa'
+    # url = f'http://{bs_user}:{bs_key}@hub-cloud.browserstack.com/wd/hub'
+    #
+    # # Define BrowserStack options  ##
+    # bstack_options = {
+    #     'osVersion': 'Sonoma',
+    #     'browserName': 'Chrome',
+    #     'os': 'OS X',
+    #     'browserVersion': 'latest',
+    #     'consoleLogs': 'info',
+    #     'sessionName': scenario_name,
+    # }
+    #
+    # # Set up WebDriver with BrowserStack
+    # options = Options()
+    # options.set_capability('bstack:options', bstack_options)
+    # context.driver = webdriver.Remote(command_executor=url, options=options)
 
-    # Define BrowserStack options
-    bstack_options = {
-        'osVersion': 'Sonoma',
-        'browserName': 'Chrome',
-        'os': 'OS X',
-        'browserVersion': 'latest',
-        'consoleLogs': 'info',
-        'sessionName': scenario_name,
-    }
-
-    # Set up WebDriver with BrowserStack
-    options = Options()
-    options.set_capability('bstack:options', bstack_options)
-    context.driver = webdriver.Remote(command_executor=url, options=options)
-
+    context.driver = webdriver.Chrome()
     context.driver.maximize_window()
     context.driver.implicitly_wait(6)
     context.wait = WebDriverWait(context.driver, timeout=15)

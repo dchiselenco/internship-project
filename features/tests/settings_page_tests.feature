@@ -108,4 +108,13 @@ Feature: Settings test cases
     And Verify that URL of window contains t.me
 
 
+  Scenario: User can go to settings and see the right number of UI elements
+    Given Open the main page
+    And Click Sign in
+    Then Input email and password
+    And Click on Continue button
+    And Click on Settings option
+    And Verify that URL of window contains settings
+    And Verify there are 12 options for the settings
+    And Verify “Connect the company” button is available and clickable
 

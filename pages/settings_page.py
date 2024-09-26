@@ -16,6 +16,7 @@ class SettingsPage(BasePage):
     NAME_INPUT = (By.CSS_SELECTOR, 'input[name="Fullname"]')
     NEWS = (By.XPATH, "//div[@class='setting-text' and text()='News']")
     NUMBER_INPUT = (By.CSS_SELECTOR, 'input#number')
+    OPTIONS = (By.XPATH, "//a[@class='page-setting-block w-inline-block']")
     SAVE_BTN = (By.CSS_SELECTOR, 'div.save-changes-button')
     SUPPORT = (By.XPATH, "//div[@class='setting-text' and text()='Support']")
     USER_GUIDE_BUTTON = (By.XPATH, "//div[@class='setting-text' and text()='User guide']")
@@ -72,6 +73,11 @@ class SettingsPage(BasePage):
         actual_text = self.driver.find_element(*self.COMPANY_INPUT).get_attribute('value')
         expected_result = 'test1'
         assert expected_result in actual_text, f'Error: Text not in {actual_text}'
+
+    def verify_number_of_options(self, number):
+        options = self.find_elements(*self.OPTIONS)
+        print(f'How many OPTIONS on the page?: {len(options)}')
+        assert len(options) == int(number), f'Error! Expected {number}, but got {len(options)}'
 
     def click_add_project(self):
         self.click(*self.ADD_PROJECT)
