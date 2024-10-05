@@ -5,6 +5,7 @@ from pages.community_page import CommunityPage
 from pages.contact_us_page import ContactUsPage
 from pages.connect_company_page import ConnectCompanyPage
 from pages.main_page import MainPage
+from pages.secondary_page import SecondaryPage
 from pages.settings_page import SettingsPage
 from pages.sign_in_page import SigninPage
 from pages.support_page import SupportPage
@@ -20,6 +21,7 @@ class Application:
         self.connect_company_page = ConnectCompanyPage(driver)
         self.contact_us_page = ContactUsPage(driver)
         self.main_page = MainPage(driver)
+        self.secondary_page = SecondaryPage(driver)
         self.settings_page = SettingsPage(driver)
         self.sign_in_page = SigninPage(driver)
         self.support_page = SupportPage(driver)
