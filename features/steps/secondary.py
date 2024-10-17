@@ -25,6 +25,11 @@ def click_filters_btn(context):
 def want_to_sell_listing_type(context):
     context.app.secondary_page.want_to_sell_listing_type()
 
+
+@then('Filter the products by “Want to buy”')
+def want_to_buy_listing_type(context):
+    context.app.secondary_page.want_to_buy_listing_type()
+
 @then('Click on "Apply Filter" button')
 def hover_and_click_apply_filter(context):
     context.app.secondary_page.hover_and_click_apply_filter()
@@ -32,3 +37,9 @@ def hover_and_click_apply_filter(context):
 @then('Verify all cards have “for sale” tag')
 def all_cards_have_for_sale_tag(context):
     context.app.secondary_page.all_cards_have_for_sale_tag()
+
+@then('Verify all cards have “Want to buy” tag')
+def all_cards_have_for_sale_tag(context):
+    context.app.secondary_page.all_cards_have_want_to_buy_tag()
+
+

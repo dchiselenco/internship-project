@@ -25,3 +25,16 @@ Feature: Tests for Secondary page
     And Filter the products by "Want to sell"
     And Click on "Apply Filter" button
     And Verify all cards have “for sale” tag
+
+
+  Scenario: User can filter the Secondary deals by “want to buy” option
+    Given Open the main page
+    And Click Sign in
+    Then Input email and password
+    And Click on Continue button
+    When Click on Secondary button
+    Then Verify that URL of window contains secondary-listings
+    And Click on Filters
+    And Filter the products by “Want to buy”
+    And Click on "Apply Filter" button
+    And Verify all cards have “Want to buy” tag

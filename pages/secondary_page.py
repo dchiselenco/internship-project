@@ -17,7 +17,9 @@ class SecondaryPage(BasePage):
     FILTERS_BTN = (By.CSS_SELECTOR, '.filter-text')
     SECONDARY_BTN = (By.XPATH, '//div[text()="Secondary"]')
     NEXT_BUTTON = (By.CSS_SELECTOR, '[wized="nextPageMLS"]')
+    WANT_TO_BUY = (By.XPATH, "//div[text()='Want to buy']")
     WANT_TO_SELL= (By.XPATH, "//div[text()='Want to sell']")
+
     CURRENT_PAGE = (By.CSS_SELECTOR, "div.page-count[wized='currentPageProperties'].page-count")
 
 
@@ -139,6 +141,15 @@ class SecondaryPage(BasePage):
         element_to_hover.click()
         sleep(2)
 
+    def want_to_buy_listing_type(self):
+        element_to_hover = WebDriverWait(self.driver, 10).until(
+            EC.visibility_of_element_located(self.WANT_TO_BUY)
+        )
+        actions = ActionChains(self.driver)
+        actions.move_to_element(element_to_hover).perform()
+        element_to_hover.click()
+        sleep(2)
+
 
     def hover_and_click_apply_filter(self):
         # Wait for the Apply Filter button to be visible
@@ -193,3 +204,42 @@ class SecondaryPage(BasePage):
             print(f'Page number: {page}')  # PAGE NUMBER
             print(f'Actual Listing: {actual_listing}')  # TOTAL OF ACTUAL LISTING FOUND
 
+    def all_cards_have_want_to_buy_tag(self):
+        LISTING_CARDS = (By.CSS_SELECTOR, '[wized="listingCardMLS"]')
+        TAG_BOX = (By.CSS_SELECTOR, '[wized="saleTagBoxMLS"]')
+        NEXT_BUTTON = (By.CSS_SELECTOR, '[wized="nextPageMLS"]')
+        TOTAL_PAGES = (By.CSS_SELECTOR, '[wized="totalPageProperties"]')
+
+        sleep(3)
+        actual_listing = 0
+        sale_boxes = self.find_elements(*LISTING_CARDS)
+
+        # Scroll to the bottom of the page
+        self.driver.execute_script("window.scrollTo(0, document.body.scrollHeight)")
+
+        # Get the total number of pagination
+        total_number_of_page = self.find_element(*TOTAL_PAGES).text
+        print(f'Total number of pages: {total_number_of_page}')
+
+        # Box Value Ex. 'want to by'
+        box_value = self.find_element(*TAG_BOX).text
+
+        # Set page to count starting 1
+        page = 1
+
+        # While page value is less than the total number of pagination and if the box_value is For sale
+        while page <= int(total_number_of_page) and box_value == 'Want to buy':
+            sleep(3)
+            for box in sale_boxes:  # ITERATE EACH SALE BOXES
+                if box_value == 'Want to buy':  # CHECK IF THE VALUE IS 'For sale'
+                    actual_listing += 1
+                else:  # IF Fos Sale, assert and break the loop
+                    assert box_value != 'Want to buy', f'Expecting Want to buy Box value, but it has {box_value}'
+                    print(box_value)
+                    break
+
+            self.click(*NEXT_BUTTON)  # CLICK NEXT BUTTON
+            page += 1  # ADD 1 TO THE NUMBER OF PAGE IN EACH ITERATION
+
+            print(f'Page number: {page}')  # PAGE NUMBER
+            print(f'Actual Listing: {actual_listing}')  # TOTAL OF ACTUAL LISTING FOUND
