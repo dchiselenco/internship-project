@@ -30,5 +30,5 @@ def hover_and_click_apply_filter(context):
     context.app.secondary_page.hover_and_click_apply_filter()
 
 @then('Verify all cards have “for sale” tag')
-def for_sale_tags_on_all_cards(context):
-    context.app.secondary_page.for_sale_tags_on_all_cards()
+def all_cards_have_for_sale_tag(context):
+    context.app.secondary_page.all_cards_have_for_sale_tag()
