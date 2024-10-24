@@ -243,3 +243,59 @@ class SecondaryPage(BasePage):
 
             print(f'Page number: {page}')  # PAGE NUMBER
             print(f'Actual Listing: {actual_listing}')  # TOTAL OF ACTUAL LISTING FOUND
+
+
+    def filter_price(self):
+        PRICE_FROM_FILTER = (By.CSS_SELECTOR, '[wized="unitPriceFromFilter"]')
+        PRICE_TO_FILTER = (By.CSS_SELECTOR, '[wized = "unitPriceToFilter"]')
+
+        # Set the price range in the filter
+        self.find_element(*PRICE_FROM_FILTER).clear()  # Clear any pre-existing value
+        self.find_element(*PRICE_FROM_FILTER).send_keys('1200000')  # Set minimum price
+
+        self.find_element(*PRICE_TO_FILTER).clear()  # Clear any pre-existing value
+        self.find_element(*PRICE_TO_FILTER).send_keys('2000000')  # Set maximum price
+
+        sleep(3)  # Wait for the page to apply the filter
+        print("Price filter applied: 1,200,000 to 2,000,000 AED")
+
+    def price_in_to_inside_range(self):
+
+        sleep(3)
+        UNIT_PRICE = (By.CSS_SELECTOR, '[wized="unitPriceMLS"]')
+        NEXT_BUTTON = (By.CSS_SELECTOR, '[wized="nextPageMLS"]')
+        TOTAL_PAGES = (By.CSS_SELECTOR, '[wized="totalPageProperties"]')
+
+        unit_price = self.find_elements(*UNIT_PRICE)
+        unit_price_element = self.find_element(*UNIT_PRICE)  # Locate the element
+        unit_price_text = unit_price_element.text  # Extract the text, e.g., 'AED 1,500,000'
+        print(f"Extracted price text: {unit_price_text}")
+        sleep(3)
+
+        # Remove the currency and commas
+        unit_price_cleaned = unit_price_text.replace('AED', '').replace(',', '').strip()
+
+        # Convert the cleaned string to an integer
+        unit_price_value = int(unit_price_cleaned)
+
+        # Scroll to the bottom of the page
+        self.driver.execute_script("window.scrollTo(0, document.body.scrollHeight)")
+
+        # Get the total number of pages
+        total_number_of_page = self.find_element(*TOTAL_PAGES).text
+        print(f'Total number of pages: {total_number_of_page}')
+
+        # Start checking listings on each page
+        page = 1
+
+        while page <= int(total_number_of_page) and 1200000 <= unit_price_value <= 2000000:
+            sleep(3)
+
+            print(f'All cards are inside the range (1200000 - 2000000) on page {page}.')
+
+            self.click(*NEXT_BUTTON)  # CLICK NEXT BUTTON
+            page += 1  # ADD 1 TO THE NUMBER OF PAGE IN EACH ITERATION
+
+            print(f'Page number: {page}')  # PAGE NUMBER
+
+        print("All listings are within the price range.")

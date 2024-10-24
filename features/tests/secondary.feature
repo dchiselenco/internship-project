@@ -38,3 +38,16 @@ Feature: Tests for Secondary page
     And Filter the products by “Want to buy”
     And Click on "Apply Filter" button
     And Verify all cards have “Want to buy” tag
+
+
+  Scenario: User can filter the Secondary deals by Unit price range
+    Given Open the main page
+    And Click Sign in
+    Then Input email and password
+    And Click on Continue button
+    When Click on Secondary button
+    Then Verify that URL of window contains secondary-listings
+    And Click on Filters
+    And Filter the products by price range from 1200000 to 2000000 AED
+    And Click on "Apply Filter" button
+    And Verify the price in all cards is inside the range (1200000 - 2000000)
