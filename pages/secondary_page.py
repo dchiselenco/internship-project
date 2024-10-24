@@ -266,36 +266,53 @@ class SecondaryPage(BasePage):
         NEXT_BUTTON = (By.CSS_SELECTOR, '[wized="nextPageMLS"]')
         TOTAL_PAGES = (By.CSS_SELECTOR, '[wized="totalPageProperties"]')
 
-        unit_price = self.find_elements(*UNIT_PRICE)
-        unit_price_element = self.find_element(*UNIT_PRICE)  # Locate the element
-        unit_price_text = unit_price_element.text  # Extract the text, e.g., 'AED 1,500,000'
-        print(f"Extracted price text: {unit_price_text}")
-        sleep(3)
-
-        # Remove the currency and commas
-        unit_price_cleaned = unit_price_text.replace('AED', '').replace(',', '').strip()
-
-        # Convert the cleaned string to an integer
-        unit_price_value = int(unit_price_cleaned)
-
-        # Scroll to the bottom of the page
-        self.driver.execute_script("window.scrollTo(0, document.body.scrollHeight)")
-
         # Get the total number of pages
         total_number_of_page = self.find_element(*TOTAL_PAGES).text
         print(f'Total number of pages: {total_number_of_page}')
 
-        # Start checking listings on each page
         page = 1
 
-        while page <= int(total_number_of_page) and 1200000 <= unit_price_value <= 2000000:
+        while page <= int(total_number_of_page):
+            # Scroll to the bottom of the page to load all listings
+            self.driver.execute_script("window.scrollTo(0, document.body.scrollHeight)")
             sleep(3)
 
-            print(f'All cards are inside the range (1200000 - 2000000) on page {page}.')
+            # Locate the elements and check if they are present
+            unit_price_elements = self.find_elements(*UNIT_PRICE)  # Locate the elements
 
-            self.click(*NEXT_BUTTON)  # CLICK NEXT BUTTON
-            page += 1  # ADD 1 TO THE NUMBER OF PAGE IN EACH ITERATION
+            # Check if prices are within the specified range
+            all_prices_within_range = True  # Flag to track if all prices are within range
 
-            print(f'Page number: {page}')  # PAGE NUMBER
+            for unit_price_element in unit_price_elements:
+                # Extract the text from the price element
+                unit_price_text = unit_price_element.text  # e.g., 'AED 1,500,000'
 
-        print("All listings are within the price range.")
+                # Remove the currency and commas to clean up the price text
+                unit_price_cleaned = unit_price_text.replace('AED', '').replace(',', '').strip()
+
+                # Convert the cleaned string to an integer
+                unit_price_value = int(unit_price_cleaned)
+
+                # Check if the price is within the range
+                if not (1200000 <= unit_price_value <= 2000000):
+                    all_prices_within_range = False  # Set the flag to False if any price is out of range
+                    break  # No need to check further prices on this page
+
+            # Print a single summary message for the page
+            if all_prices_within_range:
+                print(f'All cards are inside the range (1200000 - 2000000) on page {page}.')
+            else:
+                print(f'Some prices are out of range on page {page}.')
+
+            # Click the next button if there are more pages
+            if page < int(total_number_of_page):
+                self.click(*NEXT_BUTTON)  # CLICK NEXT BUTTON
+                page += 1  # ADD 1 TO THE NUMBER OF PAGE IN EACH ITERATION
+                print(f'Page number: {page}')  # Update the page number
+            else:
+                break  # Exit the loop if no more pages
+
+        print("Price verification completed.")
+
+
+
