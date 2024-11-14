@@ -21,3 +21,14 @@ def go_to_final_page(context):
 def go_to_first_page(context):
     context.app.off_plan_page.go_to_first_page()
 
+@then('Click on Filters from header')
+def click_filter_headers(context):
+    context.app.off_plan_page.click_filter_headers()
+
+@then('Click on "Apply Filter" button from header')
+def click_apply_filter_button(context):
+    context.app.off_plan_page.click_apply_filter_button()
+
+@then('Verify the price in all cards from off-plan pages are inside the range (1200000 - 2000000)')
+def price_in_range(context):
+    context.app.off_plan_page.price_in_range()

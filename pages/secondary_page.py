@@ -14,7 +14,7 @@ from time import sleep
 class SecondaryPage(BasePage):
     APPLY_FILTER = (By.CSS_SELECTOR, "a.button-filter.w-button")
     BACK_BUTTON = (By.XPATH, '//div[contains(@wized, "previousPage")]')
-    FILTERS_BTN = (By.CSS_SELECTOR, '.filter-text')
+    FILTERS_BTN = (By.CSS_SELECTOR, 'div.filter-text')
     SECONDARY_BTN = (By.XPATH, '//div[text()="Secondary"]')
     NEXT_BUTTON = (By.CSS_SELECTOR, '[wized="nextPageMLS"]')
     WANT_TO_BUY = (By.XPATH, "//div[text()='Want to buy']")
@@ -126,7 +126,7 @@ class SecondaryPage(BasePage):
 
     def click_filters_btn(self):
 
-        filters_btn = self.wait.until(
+        filters_btn = WebDriverWait(self.driver, 30).until(
             EC.visibility_of_element_located(self.FILTERS_BTN)
         )
         filters_btn.click()

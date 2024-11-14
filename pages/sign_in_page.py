@@ -55,7 +55,6 @@ class SigninPage(BasePage):
         email_field = self.driver.find_element(*self.EMAIL_INPUT)
         email_field.clear()
         email_field.send_keys(self.EMAIL)
-
         password_field = self.driver.find_element(*self.PASSWORD_INPUT)
         password_field.clear()
         password_field.send_keys(self.PASSWORD)
