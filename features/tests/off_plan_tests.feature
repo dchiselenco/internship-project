@@ -24,3 +24,13 @@ Feature: Tests for Off-plan page
     And Filter the products by price range from 1200000 to 2000000 AED
     And Click on "Apply Filter" button from header
     And Verify the price in all cards from off-plan pages are inside the range (1200000 - 2000000)
+
+
+  Scenario:User can see titles and pictures on each product inside the off plan page
+    Given Open the main page
+    And Click Sign in
+    Then Input email and password
+    And Click on Continue button
+    When Click on Off-plan button
+    Then Verify Off-plan page opens
+    Then Verify each product on this page contains a title and picture visible

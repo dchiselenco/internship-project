@@ -12,6 +12,8 @@ class OffPlanPage(BasePage):
     OFF_PLAN_TAB_LOCATOR = (By.XPATH, "//a[contains(@class, 'menu-text-link-leaderboard') and contains(@class, 'w--current') and text()='Off-plan']")
     OFF_PLAN_BUTTON = (By.XPATH, '//div[text()="Off-plan"]')
     NEXT_PAGE_BUTTON = (By.CSS_SELECTOR, '[wized="nextPageProperties"]')
+    IMAGE_LOCATOR = (By.CSS_SELECTOR, '[wized="projectImage"]')
+    NAME_OBJECT_LOCATOR = (By.CSS_SELECTOR, '[class="name_object_block"]')
     TOTAL_PAGES = (By.CSS_SELECTOR, '[wized="totalPageProperties"]')
     CURRENT_PAGE = (By.CSS_SELECTOR, '[wized="currentPageProperties"]')
     PREVIOUS_PAGE_BUTTON = (By.XPATH, '//div[contains(@wized, "previousPage")]')
@@ -145,3 +147,24 @@ class OffPlanPage(BasePage):
                 break  # Exit the loop if no more pages
 
         print("Price verification completed.")
+
+
+    def contains_title_and_picture_visible(self):
+        name_objects = self.find_elements(*self.NAME_OBJECT_LOCATOR)
+        displayed_names = []
+        for name in name_objects:
+            if name.is_displayed():
+                displayed_names.append(name)
+        name_count = len(displayed_names)
+
+        image_elements = self.driver.find_elements(*self.IMAGE_LOCATOR)
+        displayed_images = []
+        for image in image_elements:
+            if image.is_displayed():
+                displayed_images.append(image)
+        image_count = len(displayed_images)
+
+        if name_count == image_count:
+            print(f"The number of displayed names {name_count} matches the number of displayed images {image_count}.")
+        else:
+            print(f"Mismatch: The number of displayed names {name_count} does not match the number of displayed images {image_count}.")
