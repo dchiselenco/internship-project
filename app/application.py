@@ -4,6 +4,7 @@ from pages.change_password_page import ChangePassword
 from pages.community_page import CommunityPage
 from pages.contact_us_page import ContactUsPage
 from pages.connect_company_page import ConnectCompanyPage
+from pages.first_project_page import FirstProject
 from pages.main_page import MainPage
 from pages.off_plan_page import OffPlanPage
 from pages.secondary_page import SecondaryPage
@@ -21,6 +22,7 @@ class Application:
         self.community_page = CommunityPage(driver)
         self.connect_company_page = ConnectCompanyPage(driver)
         self.contact_us_page = ContactUsPage(driver)
+        self.first_project_page = FirstProject(driver)
         self.main_page = MainPage(driver)
         self.off_plan_page = OffPlanPage(driver)
         self.secondary_page = SecondaryPage(driver)

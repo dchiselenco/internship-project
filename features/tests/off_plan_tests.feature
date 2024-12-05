@@ -34,3 +34,26 @@ Feature: Tests for Off-plan page
     When Click on Off-plan button
     Then Verify Off-plan page opens
     Then Verify each product on this page contains a title and picture visible
+
+
+
+  Scenario:User can filter by sale status Out of Stocks
+    Given Open the main page
+    And Click Sign in
+    Then Input email and password
+    And Click on Continue button
+    When Click on Off-plan button
+    Then Filter by sale status of “Out of Stocks”
+    Then Verify each product contains the Out of Stocks tag
+
+
+
+  Scenario:User can open product detail and see three options of visualization
+    Given Open the main page
+    And Click Sign in
+    Then Input email and password
+    And Click on Continue button
+    When Click on Off-plan button
+    Then Click on the first product
+    Then Verify the options of visualization are “architecture”, “interior”
+    Then Verify the visualization options are clickable

@@ -33,3 +33,10 @@ def price_in_range(context):
 @then('Verify each product on this page contains a title and picture visible')
 def contains_title_and_picture_visible(context):
     context.app.off_plan_page.contains_title_and_picture_visible()
+
+@then('Click on the first product')
+def click_first_product(context):
+    context.app.off_plan_page.click_first_product()
+
+
+

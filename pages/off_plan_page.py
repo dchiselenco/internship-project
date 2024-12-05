@@ -2,14 +2,16 @@ from pages.base_page import BasePage
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support.ui import Select
 from selenium.webdriver.support import expected_conditions as EC
 from time import sleep
 
 
-
 class OffPlanPage(BasePage):
     # Locators
-    OFF_PLAN_TAB_LOCATOR = (By.XPATH, "//a[contains(@class, 'menu-text-link-leaderboard') and contains(@class, 'w--current') and text()='Off-plan']")
+    LOBBY_LOCATOR = (By.XPATH, '//div[text()="Lobby"]')
+    OFF_PLAN_TAB_LOCATOR = (By.XPATH,
+                            "//a[contains(@class, 'menu-text-link-leaderboard') and contains(@class, 'w--current') and text()='Off-plan']")
     OFF_PLAN_BUTTON = (By.XPATH, '//div[text()="Off-plan"]')
     NEXT_PAGE_BUTTON = (By.CSS_SELECTOR, '[wized="nextPageProperties"]')
     IMAGE_LOCATOR = (By.CSS_SELECTOR, '[wized="projectImage"]')
@@ -76,7 +78,7 @@ class OffPlanPage(BasePage):
 
         print("Reached the first page.")
 
-    def  click_filter_headers(self):
+    def click_filter_headers(self):
 
         filters_btns = self.driver.find_elements(*self.FILTERS_HEADER)
 
@@ -98,7 +100,6 @@ class OffPlanPage(BasePage):
     def price_in_range(self):
 
         sleep(3)
-
 
         # Get the total number of pages
         total_number_of_page = self.find_element(*self.TOTAL_PAGES).text
@@ -148,6 +149,7 @@ class OffPlanPage(BasePage):
 
         print("Price verification completed.")
 
+    # def select_sale_status_out_of_stocks(self):
 
     def contains_title_and_picture_visible(self):
         name_objects = self.find_elements(*self.NAME_OBJECT_LOCATOR)
@@ -167,4 +169,10 @@ class OffPlanPage(BasePage):
         if name_count == image_count:
             print(f"The number of displayed names {name_count} matches the number of displayed images {image_count}.")
         else:
-            print(f"Mismatch: The number of displayed names {name_count} does not match the number of displayed images {image_count}.")
+            print(
+                f"Mismatch: The number of displayed names {name_count} does not match the number of displayed images {image_count}.")
+
+    def click_first_product(self):
+        first_product = self.find_element(*self.IMAGE_LOCATOR)
+        first_product.click()
+
