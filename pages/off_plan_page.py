@@ -22,6 +22,8 @@ class OffPlanPage(BasePage):
     FILTERS_HEADER = (By.CSS_SELECTOR, '.filter-text')
     APPLY_FILTERS_BTN = (By.CSS_SELECTOR, "a.button-filter.w-button")
     UNIT_PRICE = (By.CSS_SELECTOR, '[wized="unitPriceMLS"]')
+    SALE_STATUS_SELECTION = (By.CSS_SELECTOR, 'select[id="Location-2"]')
+
 
     def click_off_plan_btn(self):
         self.wait_until_clickable(*self.OFF_PLAN_BUTTON)
@@ -149,7 +151,7 @@ class OffPlanPage(BasePage):
 
         print("Price verification completed.")
 
-    # def select_sale_status_out_of_stocks(self):
+
 
     def contains_title_and_picture_visible(self):
         name_objects = self.find_elements(*self.NAME_OBJECT_LOCATOR)
@@ -175,4 +177,53 @@ class OffPlanPage(BasePage):
     def click_first_product(self):
         first_product = self.find_element(*self.IMAGE_LOCATOR)
         first_product.click()
+
+
+    def select_sale_status_out_of_stock(self):
+        sale_status_dd = self.find_element(*self.SALE_STATUS_SELECTION)
+        select = Select(sale_status_dd)
+        sleep(2)
+        select.select_by_value('Out-of-stock')
+
+
+    def all_cards_have_out_of_stock_tag(self):
+        LISTING_CARDS = (By.CSS_SELECTOR, '[wized="projectImage"]')
+        TAG_BOX = (By.CSS_SELECTOR, '[wized="projectStatus"]')
+        NEXT_BUTTON = (By.CSS_SELECTOR, '[wized="nextPageProperties"]')
+        TOTAL_PAGES = (By.CSS_SELECTOR, '[wized="totalPageProperties"]')
+
+
+        sleep(3)
+        actual_listing = 0
+        sale_boxes = self.find_elements(*LISTING_CARDS)
+
+        # Scroll to the bottom of the page
+        self.driver.execute_script("window.scrollTo(0, document.body.scrollHeight)")
+
+        # Get the total number of pagination
+        total_number_of_page = self.find_element(*TOTAL_PAGES).text
+        print(f'Total number of pages: {total_number_of_page}')
+
+        # Box Value Ex. 'want to by'
+        box_value = self.find_element(*TAG_BOX).text
+
+        # Set page to count starting 1
+        page = 1
+
+        # While page value is less than the total number of pagination and if the box_value is For sale
+        while page <= int(total_number_of_page) and box_value == 'Out of Stock':
+            sleep(3)
+            for box in sale_boxes:  # ITERATE EACH SALE BOXES
+                if box_value == 'Out of Stock':  # CHECK IF THE VALUE IS 'For sale'
+                    actual_listing += 1
+                else:  # IF Fos Sale, assert and break the loop
+                    assert box_value != 'Out of Stock', f'Expecting Want to buy Box value, but it has {box_value}'
+                    print(box_value)
+                    break
+
+            self.click(*NEXT_BUTTON)  # CLICK NEXT BUTTON
+            page += 1  # ADD 1 TO THE NUMBER OF PAGE IN EACH ITERATION
+
+            print(f'Page number: {page}')  # PAGE NUMBER
+            print(f'Actual Listing: {actual_listing}')  # TOTAL OF ACTUAL LISTING FOUND
 
