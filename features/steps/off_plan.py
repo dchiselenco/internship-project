@@ -38,13 +38,13 @@ def contains_title_and_picture_visible(context):
 def click_first_product(context):
     context.app.off_plan_page.click_first_product()
 
-@then('Filter by sale status of “Out of Stocks”')
+@then('Filter by sale status of “Out of Stock”')
 def select_sale_status_out_of_stock(context):
     context.app.off_plan_page.select_sale_status_out_of_stock()
 
-@then('Verify each product contains the Out of Stocks tag')
+@then('Verify each product contains the Out of Stock tag')
 def all_cards_have_out_of_stocks_tag(context):
-    context.app.off_plan_page.all_cards_have_out_of_stocks_tag()
+    context.app.off_plan_page.all_cards_have_out_of_stock_tag()
 
 
 

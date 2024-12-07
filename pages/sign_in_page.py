@@ -22,7 +22,6 @@ class SigninPage(BasePage):
     USER_NAME = (By.XPATH, '//div[@wized="userName" and @class="name_text_account" and @w-el-text="Name Surname" and '
                            'text()="Dany C"]')
 
-
     EMAIL = "dchiselenco@gmail.com"
     PASSWORD = "Qwaszx!234"
 
@@ -49,8 +48,6 @@ class SigninPage(BasePage):
         entered_password = password_field.get_attribute('value')
         assert entered_password == expected_password, f"Expected password '{expected_password}' but got '{entered_password}'"
 
-
-
     def input_credentials(self):
         email_field = self.driver.find_element(*self.EMAIL_INPUT)
         email_field.clear()
@@ -58,7 +55,6 @@ class SigninPage(BasePage):
         password_field = self.driver.find_element(*self.PASSWORD_INPUT)
         password_field.clear()
         password_field.send_keys(self.PASSWORD)
-
 
     def verify_subscription_and_payments_text(self):
         self.verify_text('Subscription & payments', *self.SUBSCRIPTION_AND_PAYMENT_TXT)

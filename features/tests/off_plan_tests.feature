@@ -43,8 +43,8 @@ Feature: Tests for Off-plan page
     Then Input email and password
     And Click on Continue button
     When Click on Off-plan button
-    Then Filter by sale status of “Out of Stocks”
-    Then Verify each product contains the Out of Stocks tag
+    Then Filter by sale status of “Out of Stock”
+    Then Verify each product contains the Out of Stock tag
 
 
 

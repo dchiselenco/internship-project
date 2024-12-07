@@ -52,7 +52,6 @@ class BasePage:
             f'Element still visible by {locator}'
         )
 
-
     def switch_to_new_window(self):
         self.wait.until(EC.new_window_is_opened)
         all_windows = self.driver.window_handles  # give us the list of windows [Win1, Win2, ...]

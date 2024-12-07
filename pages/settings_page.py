@@ -21,7 +21,6 @@ class SettingsPage(BasePage):
     SUPPORT = (By.XPATH, "//div[@class='setting-text' and text()='Support']")
     USER_GUIDE_BUTTON = (By.XPATH, "//div[@class='setting-text' and text()='User guide']")
 
-
     def click_edit_profile_btn(self):
         self.click(*self.EDIT_BTN)
         sleep(3)
@@ -33,10 +32,8 @@ class SettingsPage(BasePage):
     def click_save_btn(self):
         self.click(*self.SAVE_BTN)
 
-
     def click_close_btn(self):
         self.click(*self.CLOSE_BTN)
-
 
     def input_name(self, name):
         input_fname = self.find_element(*self.NAME_INPUT)
@@ -44,20 +41,17 @@ class SettingsPage(BasePage):
         # self.clear()
         self.input_text(name, *self.NAME_INPUT)
 
-
     def input_number(self, number):
         input_number = self.find_element(*self.NUMBER_INPUT)
         input_number.clear()
         # self.clear()
         self.input_text(number, *self.NUMBER_INPUT)
 
-
     def input_company(self, test):
         input_company = self.find_element(*self.COMPANY_INPUT)
         input_company.clear()
         # self.clear()
         self.input_text(test, *self.COMPANY_INPUT)
-
 
     def verify_new_name(self):
         actual_text = self.driver.find_element(By.CSS_SELECTOR, 'input[name="Fullname"]').get_attribute('value')
@@ -96,4 +90,3 @@ class SettingsPage(BasePage):
 
     def click_user_guide(self):
         self.click(*self.USER_GUIDE_BUTTON)
-

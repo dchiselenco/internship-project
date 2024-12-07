@@ -11,6 +11,7 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium import webdriver
 from time import sleep
 
+
 class SecondaryPage(BasePage):
     APPLY_FILTER = (By.CSS_SELECTOR, "a.button-filter.w-button")
     BACK_BUTTON = (By.XPATH, '//div[contains(@wized, "previousPage")]')
@@ -18,10 +19,9 @@ class SecondaryPage(BasePage):
     SECONDARY_BTN = (By.XPATH, '//div[text()="Secondary"]')
     NEXT_BUTTON = (By.CSS_SELECTOR, '[wized="nextPageMLS"]')
     WANT_TO_BUY = (By.XPATH, "//div[text()='Want to buy']")
-    WANT_TO_SELL= (By.XPATH, "//div[text()='Want to sell']")
+    WANT_TO_SELL = (By.XPATH, "//div[text()='Want to sell']")
 
     CURRENT_PAGE = (By.CSS_SELECTOR, "div.page-count[wized='currentPageProperties'].page-count")
-
 
     def click_secondary_btn(self):
         self.wait_until_clickable(*self.SECONDARY_BTN)
@@ -123,14 +123,12 @@ class SecondaryPage(BasePage):
                 print("Reached the first page,  'Back' button is not anymore clickable")
                 break
 
-
     def click_filters_btn(self):
 
         filters_btn = WebDriverWait(self.driver, 30).until(
             EC.visibility_of_element_located(self.FILTERS_BTN)
         )
         filters_btn.click()
-
 
     def want_to_sell_listing_type(self):
         element_to_hover = WebDriverWait(self.driver, 10).until(
@@ -149,7 +147,6 @@ class SecondaryPage(BasePage):
         actions.move_to_element(element_to_hover).perform()
         element_to_hover.click()
         sleep(2)
-
 
     def hover_and_click_apply_filter(self):
         # Wait for the Apply Filter button to be visible
@@ -193,16 +190,15 @@ class SecondaryPage(BasePage):
             for box in sale_boxes:  # ITERATE EACH SALE BOXES
                 if box_value == 'For sale':  # CHECK IF THE VALUE IS 'For sale'
                     actual_listing += 1
-                else:  # IF Fos Sale, assert and break the loop
-                    assert box_value != 'For sale', f'Expecting For sale Box value, but it has {box_value}'
-                    print(box_value)
+                else:  # IF just one box_value is not  For Sale  break the loop
+                    print(f'Not all the items have For sale status')
                     break
 
             self.click(*NEXT_BUTTON)  # CLICK NEXT BUTTON
             page += 1  # ADD 1 TO THE NUMBER OF PAGE IN EACH ITERATION
 
-            print(f'Page number: {page}')  # PAGE NUMBER
-            print(f'Actual Listing: {actual_listing}')  # TOTAL OF ACTUAL LISTING FOUND
+            # print(f'Page number: {page}')  # PAGE NUMBER
+            print(f'All cards with For Sale tag : {actual_listing}')  # TOTAL OF ACTUAL LISTING FOUND
 
     def all_cards_have_want_to_buy_tag(self):
         LISTING_CARDS = (By.CSS_SELECTOR, '[wized="listingCardMLS"]')
@@ -225,25 +221,24 @@ class SecondaryPage(BasePage):
         box_value = self.find_element(*TAG_BOX).text
 
         # Set page to count starting 1
-        page = 1
+        page = 0
 
         # While page value is less than the total number of pagination and if the box_value is For sale
-        while page <= int(total_number_of_page) and box_value == 'Want to buy':
+        while page < int(total_number_of_page) and box_value == 'Want to buy':
             sleep(3)
             for box in sale_boxes:  # ITERATE EACH SALE BOXES
-                if box_value == 'Want to buy':  # CHECK IF THE VALUE IS 'For sale'
+                if box_value == 'Want to buy':  # CHECK IF THE VALUE IS 'want to buy'
                     actual_listing += 1
-                else:  # IF Fos Sale, assert and break the loop
-                    assert box_value != 'Want to buy', f'Expecting Want to buy Box value, but it has {box_value}'
-                    print(box_value)
+                else:  # IF not "want to sale" tag, assert and break the loop
+                    print(f"Unexpected tag found: {box_value}")
                     break
 
             self.click(*NEXT_BUTTON)  # CLICK NEXT BUTTON
             page += 1  # ADD 1 TO THE NUMBER OF PAGE IN EACH ITERATION
 
             print(f'Page number: {page}')  # PAGE NUMBER
-            print(f'Actual Listing: {actual_listing}')  # TOTAL OF ACTUAL LISTING FOUND
-
+            print(
+                f'After page number {page} total of cards that have “Want to buy” tag is: {actual_listing}')  # TOTAL OF ACTUAL LISTING FOUND
 
     def filter_price(self):
         PRICE_FROM_FILTER = (By.CSS_SELECTOR, '[wized="unitPriceFromFilter"]')
@@ -313,6 +308,3 @@ class SecondaryPage(BasePage):
                 break  # Exit the loop if no more pages
 
         print("Price verification completed.")
-
-
-

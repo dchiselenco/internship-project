@@ -36,9 +36,7 @@ class AddProject(BasePage):
         self.input_text('88888', *self.INPUT_PROJECT_PHONE)
         self.input_text('dchiselenco@gmail.com', *self.INPUT_PROJECT_EMAIL)
 
-
     def input_field_verification(self):
-
         element_email = WebDriverWait(self.driver, 3).until(
             EC.presence_of_element_located(self.INPUT_PROJECT_EMAIL)
         )

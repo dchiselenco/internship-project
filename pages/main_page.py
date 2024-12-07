@@ -6,7 +6,6 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
 
-
 class MainPage(BasePage):
     LANGUAGE = (By.CSS_SELECTOR, '[id="w-dropdown-toggle-0"]')
     MENU_LANG = (By.CSS_SELECTOR, "div[id='w-dropdown-toggle-0']")

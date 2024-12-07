@@ -9,7 +9,6 @@ class ChangePassword(BasePage):
     ENTER_NEW_PASSWORD_INPUT = (By.ID, "Enter-new-password")
     REPEAT_PASSWORD_INPUT = (By.ID, "Repeat-password")
 
-
     def input_change_password_info(self):
         WebDriverWait(self.driver, 3).until(
             EC.presence_of_element_located(self.ENTER_NEW_PASSWORD_INPUT)

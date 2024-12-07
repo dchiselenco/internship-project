@@ -24,7 +24,6 @@ class OffPlanPage(BasePage):
     UNIT_PRICE = (By.CSS_SELECTOR, '[wized="unitPriceMLS"]')
     SALE_STATUS_SELECTION = (By.CSS_SELECTOR, 'select[id="Location-2"]')
 
-
     def click_off_plan_btn(self):
         self.wait_until_clickable(*self.OFF_PLAN_BUTTON)
         sleep(6)
@@ -151,8 +150,6 @@ class OffPlanPage(BasePage):
 
         print("Price verification completed.")
 
-
-
     def contains_title_and_picture_visible(self):
         name_objects = self.find_elements(*self.NAME_OBJECT_LOCATOR)
         displayed_names = []
@@ -178,52 +175,68 @@ class OffPlanPage(BasePage):
         first_product = self.find_element(*self.IMAGE_LOCATOR)
         first_product.click()
 
-
     def select_sale_status_out_of_stock(self):
         sale_status_dd = self.find_element(*self.SALE_STATUS_SELECTION)
         select = Select(sale_status_dd)
-        sleep(2)
-        select.select_by_value('Out-of-stock')
-
+        select.select_by_value('Out of stock')
+        sleep(10)
 
     def all_cards_have_out_of_stock_tag(self):
-        LISTING_CARDS = (By.CSS_SELECTOR, '[wized="projectImage"]')
-        TAG_BOX = (By.CSS_SELECTOR, '[wized="projectStatus"]')
+        LISTING_PROJECTS = (By.CSS_SELECTOR, '[wized="projectImage"]')
+        TAG_PROJECT = (By.CSS_SELECTOR, '[wized="projectStatus"]')
         NEXT_BUTTON = (By.CSS_SELECTOR, '[wized="nextPageProperties"]')
         TOTAL_PAGES = (By.CSS_SELECTOR, '[wized="totalPageProperties"]')
+        TOTAL_PROJECTS = (By.CSS_SELECTOR, '[wized="totalPropertyCounter"]')
 
-
-        sleep(3)
         actual_listing = 0
-        sale_boxes = self.find_elements(*LISTING_CARDS)
-
-        # Scroll to the bottom of the page
-        self.driver.execute_script("window.scrollTo(0, document.body.scrollHeight)")
-
-        # Get the total number of pagination
-        total_number_of_page = self.find_element(*TOTAL_PAGES).text
-        print(f'Total number of pages: {total_number_of_page}')
-
-        # Box Value Ex. 'want to by'
-        box_value = self.find_element(*TAG_BOX).text
 
         # Set page to count starting 1
-        page = 1
+        page = 0
 
-        # While page value is less than the total number of pagination and if the box_value is For sale
-        while page <= int(total_number_of_page) and box_value == 'Out of Stock':
-            sleep(3)
-            for box in sale_boxes:  # ITERATE EACH SALE BOXES
-                if box_value == 'Out of Stock':  # CHECK IF THE VALUE IS 'For sale'
+        wait = WebDriverWait(self.driver, 10)
+        total_number_of_page_element = wait.until(
+            EC.visibility_of_element_located(TOTAL_PAGES)
+        )
+
+        # Get the total number of pagination
+        total_number_of_page = total_number_of_page_element.text
+        print(f"Total number of pages: {total_number_of_page}")
+
+        counter_projects = int(self.find_element(*TOTAL_PROJECTS).text)
+        print(f"Total Projects after applying Out of stock filter: {counter_projects}")
+
+        # counter_projects = wait.until(EC.visibility_of_element_located(TOTAL_PROJECTS))
+        # counter_projects_text = counter_projects.text
+        # total_properties = int(counter_projects_text)
+        # print(f"Total properties: {total_properties}")
+
+        # While page value is less than the total number of pagination and if the box_value is Out of Stock
+        while page < int(total_number_of_page):
+            # Scroll to the bottom of the page to load dynamic content
+            self.driver.execute_script("window.scrollTo(0, document.body.scrollHeight)")
+            sleep(3)  # Give time for any lazy-loaded content to appear
+
+            # Get the list of projects on the current page
+            listing_projects = self.find_elements(*LISTING_PROJECTS)
+
+            # Iterate through each project card
+            for listing in listing_projects:
+                # Get the project status (tag)
+                listing_value = listing.find_element(*TAG_PROJECT).text
+                if listing_value == 'Out of stock':  # Check if the tag is 'Out of Stock'
                     actual_listing += 1
-                else:  # IF Fos Sale, assert and break the loop
-                    assert box_value != 'Out of Stock', f'Expecting Want to buy Box value, but it has {box_value}'
-                    print(box_value)
-                    break
+                else:
+                    print(f"Unexpected tag found: {listing_value}")
 
-            self.click(*NEXT_BUTTON)  # CLICK NEXT BUTTON
-            page += 1  # ADD 1 TO THE NUMBER OF PAGE IN EACH ITERATION
+            # Click the "Next" button to go to the next page if it's available
+            self.click(*NEXT_BUTTON)
+            page += 1  # Move to the next page
 
-            print(f'Page number: {page}')  # PAGE NUMBER
-            print(f'Actual Listing: {actual_listing}')  # TOTAL OF ACTUAL LISTING FOUND
-
+            print(f'Page number: {page}')  # Print the current page number
+            print(
+                f'Total number of listings with status "Out of Stock" in the end of page {page} is : {actual_listing}')  # Print the current count of "Out of Stock" listings
+        assert actual_listing == counter_projects, (
+            f"Mismatch found: Expected {counter_projects}, but found {actual_listing}"
+        )
+        print(f"Assertion passed: Found {actual_listing} projects with the 'Out of Stock' tag, "
+              f"matching the expected total of {counter_projects}.")
