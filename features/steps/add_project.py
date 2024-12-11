@@ -18,7 +18,6 @@ def input_project_info(context):
     context.app.add_project_page.input_project_info()
 
 
-
 @then('Verify the right information is present in the input field')
 def input_field_verification(context):
     # expected_email = "dchiselenco@gmail.com"
@@ -27,8 +26,6 @@ def input_field_verification(context):
     context.app.add_project_page.input_field_verification()
 
 
-
 @then('Verify Send an Application button is available and clickable')
 def send_application_button_verification(context):
     context.app.add_project_page.send_an_application_button_verification()
-

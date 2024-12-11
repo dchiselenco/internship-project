@@ -37,61 +37,40 @@ class OffPlanPage(BasePage):
             print("The Off-plan page is not active.")
 
     def go_to_final_page(self):
-        # Scroll to the bottom of the page
-        self.driver.execute_script("window.scrollTo(0, document.body.scrollHeight)")
 
-        # Get the total number of pages
+        self.driver.execute_script("window.scrollTo(0, document.body.scrollHeight)")
         total_number_of_pages = int(self.find_element(*self.TOTAL_PAGES).text)
         print(f'Total number of pages: {total_number_of_pages}')
 
-        # Start on page 1
         page = 1
-
-        # Loop through all pages until reaching the last one
         while page < total_number_of_pages:
-            print(f'Navigating to page {page + 1}')  # Print the next page number for tracking
-
-            # Click the next button to go to the next page
+            print(f'Navigating to page {page + 1}')
             self.click(*self.NEXT_PAGE_BUTTON)
-
-            # Increment the page count
             page += 1
-            sleep(3)  # Optional: Add delay to wait for page load if needed
+            sleep(3)
 
         print("Reached the last page.")
 
     def go_to_first_page(self):
-        # Check if we're already on the first page
-        current_page = int(self.find_element(*self.CURRENT_PAGE).text)
 
-        # Navigate back to the first page if not already there
+        current_page = int(self.find_element(*self.CURRENT_PAGE).text)
         while current_page > 1:
             print(f"Currently on page {current_page}. Go to the previous page.")
-
-            # Click the "Previous" button
             self.click(*self.PREVIOUS_PAGE_BUTTON)
-
-            # Wait for the page to load (adjust as needed)
             sleep(3)
-
-            # Update the current page number
             current_page = int(self.find_element(*self.CURRENT_PAGE).text)
 
         print("Reached the first page.")
 
     def click_filter_headers(self):
 
-        filters_btns = self.driver.find_elements(*self.FILTERS_HEADER)
-
-        # Select the element at index 1 (second element in the list)
-        filters_btn = filters_btns[1]
-
-        # Click the element
-        filters_btn.click()
+        filters_button = self.driver.find_elements(*self.FILTERS_HEADER)
+        filters_button = filters_button[1]
+        filters_button.click()
 
     def click_apply_filter_button(self):
         apply_btn = WebDriverWait(self.driver, 10).until(
-            EC.visibility_of_element_located(self.APPLY_FILTERS_BTN)  # Change the locator as necessary
+            EC.visibility_of_element_located(self.APPLY_FILTERS_BTN)
         )
         actions = ActionChains(self.driver)
         actions.move_to_element(apply_btn).perform()
@@ -101,58 +80,45 @@ class OffPlanPage(BasePage):
     def price_in_range(self):
 
         sleep(3)
-
-        # Get the total number of pages
         total_number_of_page = self.find_element(*self.TOTAL_PAGES).text
         print(f'Total number of pages: {total_number_of_page}')
 
         page = 1
 
         while page <= int(total_number_of_page):
-            # Scroll to the bottom of the page to load all listings
             self.driver.execute_script("window.scrollTo(0, document.body.scrollHeight)")
             sleep(3)
-
-            # Locate the elements and check if they are present
-            unit_price_elements = self.find_elements(*self.UNIT_PRICE)  # Locate the elements
-
-            # Check if prices are within the specified range
-            all_prices_within_range = True  # Flag to track if all prices are within range
+            unit_price_elements = self.find_elements(*self.UNIT_PRICE)
+            all_prices_within_range = True
 
             for unit_price_element in unit_price_elements:
-                # Extract the text from the price element
-                unit_price_text = unit_price_element.text  # e.g., 'AED 1,500,000'
-
-                # Remove the currency and commas to clean up the price text
+                unit_price_text = unit_price_element.text
                 unit_price_cleaned = unit_price_text.replace('AED', '').replace(',', '').strip()
-
-                # Convert the cleaned string to an integer
                 unit_price_value = int(unit_price_cleaned)
 
-                # Check if the price is within the range
                 if not (1200000 <= unit_price_value <= 2000000):
-                    all_prices_within_range = False  # Set the flag to False if any price is out of range
-                    break  # No need to check further prices on this page
+                    all_prices_within_range = False
+                    break
 
-            # Print a single summary message for the page
             if all_prices_within_range:
                 print(f'All cards are inside the range (1200000 - 2000000) on page {page}.')
             else:
                 print(f'Some prices are out of range on page {page}.')
 
-            # Click the next button if there are more pages
             if page < int(total_number_of_page):
-                self.click(*self.NEXT_PAGE_BUTTON)  # CLICK NEXT BUTTON
-                page += 1  # ADD 1 TO THE NUMBER OF PAGE IN EACH ITERATION
-                print(f'Page number: {page}')  # Update the page number
+                self.click(*self.NEXT_PAGE_BUTTON)
+                page += 1
+                print(f'Page number: {page}')
             else:
-                break  # Exit the loop if no more pages
+                break
 
         print("Price verification completed.")
 
     def contains_title_and_picture_visible(self):
+
         name_objects = self.find_elements(*self.NAME_OBJECT_LOCATOR)
         displayed_names = []
+
         for name in name_objects:
             if name.is_displayed():
                 displayed_names.append(name)
@@ -160,6 +126,7 @@ class OffPlanPage(BasePage):
 
         image_elements = self.driver.find_elements(*self.IMAGE_LOCATOR)
         displayed_images = []
+
         for image in image_elements:
             if image.is_displayed():
                 displayed_images.append(image)
@@ -189,8 +156,6 @@ class OffPlanPage(BasePage):
         TOTAL_PROJECTS = (By.CSS_SELECTOR, '[wized="totalPropertyCounter"]')
 
         actual_listing = 0
-
-        # Set page to count starting 1
         page = 0
 
         wait = WebDriverWait(self.driver, 10)
@@ -198,41 +163,27 @@ class OffPlanPage(BasePage):
             EC.visibility_of_element_located(TOTAL_PAGES)
         )
 
-        # Get the total number of pagination
         total_number_of_page = total_number_of_page_element.text
         print(f"Total number of pages: {total_number_of_page}")
 
         counter_projects = int(self.find_element(*TOTAL_PROJECTS).text)
         print(f"Total Projects after applying Out of stock filter: {counter_projects}")
 
-        # counter_projects = wait.until(EC.visibility_of_element_located(TOTAL_PROJECTS))
-        # counter_projects_text = counter_projects.text
-        # total_properties = int(counter_projects_text)
-        # print(f"Total properties: {total_properties}")
-
-        # While page value is less than the total number of pagination and if the box_value is Out of Stock
         while page < int(total_number_of_page):
-            # Scroll to the bottom of the page to load dynamic content
             self.driver.execute_script("window.scrollTo(0, document.body.scrollHeight)")
-            sleep(3)  # Give time for any lazy-loaded content to appear
-
-            # Get the list of projects on the current page
+            sleep(3)
             listing_projects = self.find_elements(*LISTING_PROJECTS)
 
-            # Iterate through each project card
             for listing in listing_projects:
-                # Get the project status (tag)
                 listing_value = listing.find_element(*TAG_PROJECT).text
-                if listing_value == 'Out of stock':  # Check if the tag is 'Out of Stock'
+                if listing_value == 'Out of stock':
                     actual_listing += 1
                 else:
                     print(f"Unexpected tag found: {listing_value}")
 
-            # Click the "Next" button to go to the next page if it's available
             self.click(*NEXT_BUTTON)
-            page += 1  # Move to the next page
-
-            print(f'Page number: {page}')  # Print the current page number
+            page += 1
+            print(f'Page number: {page}')
             print(
                 f'Total number of listings with status "Out of Stock" in the end of page {page} is : {actual_listing}')  # Print the current count of "Out of Stock" listings
         assert actual_listing == counter_projects, (

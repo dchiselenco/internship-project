@@ -1,13 +1,12 @@
 # Created by dchis at 7/26/2024
 Feature:  Tests for Main page
 
-   Scenario: The user name is visible when log in
+  Scenario: The user name is visible when log in
     Given Open the main page
     And Click Sign in
     Then Input email and password
     And Click on Continue button
     And Verify user name is visible
-
 
 
   Scenario: Verify the user can change the language from the page
@@ -18,7 +17,6 @@ Feature:  Tests for Main page
     When Click on menu
     And Change the language
     Then Verify the language has changed
-
 
 
   Scenario:The user can click on “Connect the company”

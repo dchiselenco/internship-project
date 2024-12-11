@@ -36,7 +36,6 @@ Feature: Tests for Off-plan page
     Then Verify each product on this page contains a title and picture visible
 
 
-
   Scenario:User can filter by sale status Out of Stocks
     Given Open the main page
     And Click Sign in
@@ -45,7 +44,6 @@ Feature: Tests for Off-plan page
     When Click on Off-plan button
     Then Filter by sale status of “Out of Stock”
     Then Verify each product contains the Out of Stock tag
-
 
 
   Scenario:User can open product detail and see three options of visualization

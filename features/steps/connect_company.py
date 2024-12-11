@@ -8,11 +8,9 @@ def click_connect_company(context):
     context.app.connect_company_page.click_connect_company()
 
 
-
 @when('Switch to the new tab')
 def switch_to_new_tab(context):
     context.app.connect_company_page.switch_to_new_window()
-
 
 
 @when('Verify the right tab opens')
