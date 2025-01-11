@@ -11,9 +11,13 @@ Feature: Market page test cases
     When Click on Market button
 
   Scenario: User can open market tab and go through the pagination
-
     Then Verify Market page opens
     And Go to the final Market page using the pagination button
     And Go back to the first Market page using the pagination button
+
+  Scenario: User can open market tab and filter by developers option
+    Then Click on Developers filter at the top of the page
+    Then Verify all cards has the license tag
+
 
 

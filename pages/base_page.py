@@ -7,11 +7,6 @@ class BasePage:
         self.driver = driver
         self.wait = WebDriverWait(driver, 10)
 
-    def wait_for_element(self, locator, timeout=10):
-        return self.wait.until(EC.visibility_of_element_located(locator))
-
-    def wait_until_clickable(self, locator, timeout=10):
-        return self.wait.until(EC.element_to_be_clickable(locator))
 
     def open(self, url):
         self.driver.get(url)
@@ -24,6 +19,9 @@ class BasePage:
 
     def click(self, *locator):
         self.driver.find_element(*locator).click()
+
+    def wait_for_element(self, locator, timeout=10):
+        return self.wait.until(EC.visibility_of_element_located(locator))
 
     def input_text(self, text, *locator):
         self.driver.find_element(*locator).send_keys(text)

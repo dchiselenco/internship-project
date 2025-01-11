@@ -2,13 +2,16 @@
 Feature: Edit test cases
   All testing scenarios for Edit page are located here
 
-  Scenario: User can go to  edit to verify personal information
 
+  Background:
     Given Open the main page
     And Click Sign in
     Then Input email and password
     And Click on Continue button
     And Click on Settings option
+
+  Scenario: User can go to  edit to verify personal information
+
     Then Click on the Edit profile option
     When Enter test data into the name field: Dany C
     Then Enter test data into the phone number field: 832 829 0101

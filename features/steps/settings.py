@@ -48,6 +48,11 @@ def click_contact_us(context):
     context.app.settings_page.click_contact_us()
 
 
+@then('Click on the verification option')
+def click_verification(context):
+    context.app.settings_page.click_verification()
+
+
 @then('Verify the right information is present in the company input field')
 def verify_new_company(context):
     context.app.settings_page.verify_new_company()

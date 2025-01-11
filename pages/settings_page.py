@@ -20,6 +20,8 @@ class SettingsPage(BasePage):
     SAVE_BTN = (By.CSS_SELECTOR, 'div.save-changes-button')
     SUPPORT = (By.XPATH, "//div[@class='setting-text' and text()='Support']")
     USER_GUIDE_BUTTON = (By.XPATH, "//div[@class='setting-text' and text()='User guide']")
+    VERIFICATION_BUTTON = (By.XPATH, '//div[text()="Verification"]')
+
 
     def click_edit_profile_btn(self):
         self.click(*self.EDIT_BTN)
@@ -90,3 +92,8 @@ class SettingsPage(BasePage):
 
     def click_user_guide(self):
         self.click(*self.USER_GUIDE_BUTTON)
+
+    def click_verification(self):
+        self.click(*self.VERIFICATION_BUTTON)
+
+

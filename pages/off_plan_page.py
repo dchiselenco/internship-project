@@ -167,7 +167,7 @@ class OffPlanPage(BasePage):
         print(f"Total number of pages: {total_number_of_page}")
 
         counter_projects = int(self.find_element(*TOTAL_PROJECTS).text)
-        print(f"Total Projects after applying Out of stock filter: {counter_projects}")
+        print(f"Total Listings after clicking Developers tag: {counter_projects}")
 
         while page < int(total_number_of_page):
             self.driver.execute_script("window.scrollTo(0, document.body.scrollHeight)")

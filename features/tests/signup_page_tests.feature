@@ -9,7 +9,3 @@ Feature: Relly app
     Then Input email and password
     And Verify correct username is visible in email field
     And Verify correct password is present in password field
-
-
-
-
