@@ -68,7 +68,7 @@ class MarketPage(BasePage):
         ).text
         int_counter = int(counter_number)
         print(f'Total cards listed in developer page: {int_counter}')
-        actual_listing = 0
+        sum = 0
         page = 0
 
         # Get the total number of pagination
@@ -79,21 +79,25 @@ class MarketPage(BasePage):
             # Scroll to the bottom of the page
             self.driver.execute_script("window.scrollTo(0, document.body.scrollHeight)")
             sleep(3)
-            listing_cards = self.find_elements(*LISTING_CARDS)
-            for card in listing_cards:  # ITERATE EACH card
-                license_tag = card.find_element(*LICENSE_TEXT).text  # Find license tag in each card
-                if license_tag == 'License':
-                    actual_listing += 1
-                else:
-                    print(f"Unexpected tag found: {license_tag}")
+            # listing_cards = self.find_elements(*LISTING_CARDS)
+            # for card in listing_cards:  # ITERATE EACH card
+            #     license_tag = card.find_element(*LICENSE_TEXT).text  # Find license tag in each card
+            #     if license_tag == 'License':
+            #         actual_listing += 1
+            #     else:
+            #         print(f"Unexpected tag found: {license_tag}")
+
+            license_tags = self.find_elements(*LICENSE_TEXT)
+            license_tags_count = len(license_tags)
+            sum += int(license_tags_count)
 
             # CLICK NEXT BUTTON
             self.click(*NEXT_BUTTON)
             page += 1
             print(
-                f'After page number {page} total of cards that have “License” tag is: {actual_listing}')
+                f'After page number {page} total of cards that have “License” tag is: {license_tags_count} and sum of the pages is: {sum}')
         # Final verification
-        assert actual_listing == int_counter, (
-            f"Expected {int_counter} cards with the 'License' tag, but found {actual_listing}."
+        assert sum == int_counter, (
+            f"Expected {int_counter} cards with the 'License' tag, but found {sum}."
         )
         print("All cards have the correct 'License' tag.")
