@@ -8,9 +8,11 @@ from time import sleep
 
 
 class MarketPage(BasePage):
+    ADD_COMPANY_BUTTON = (By.XPATH, '//div[text()="Add company"]')
     CURRENT_PAGE = (By.CSS_SELECTOR, '[wized="currentPageMarket"]')
     NEXT_PAGE_BUTTON = (By.CSS_SELECTOR, '[wized="nextPageMarket"]')
     PREVIOUS_PAGE_BUTTON = (By.XPATH, '//div[contains(@wized, "previousPageMarket")]')
+    PUBLISH_MY_COMPANY_BUTTON = (By.XPATH, '//a[contains(text(), "Publish my company")]')
     TOTAL_PAGES = (By.CSS_SELECTOR, '[wized="totalPageMarket"]')
     MARKET_BUTTON = (By.XPATH, '//div[text()="Market"]')
     DEVELOPERS_BUTTON = (By.XPATH, '//div[text()="Developers"]')
@@ -101,3 +103,18 @@ class MarketPage(BasePage):
             f"Expected {int_counter} cards with the 'License' tag, but found {sum}."
         )
         print("All cards have the correct 'License' tag.")
+
+    def click_add_company(self):
+        self.wait_until_clickable(*self.ADD_COMPANY_BUTTON)
+
+    def verify_add_company_tab_opens(self, expected_partial_url='presentation-for-the-agency'):
+        self.wait.until(EC.url_contains(expected_partial_url),
+                        message=f'URL does not contain {expected_partial_url}')
+
+    sleep(10)
+    def verify_publish_my_company_available(self):
+        publish_my_company_elements = self.driver.find_elements(*self.PUBLISH_MY_COMPANY_BUTTON)
+        visible_elements = [element for element in publish_my_company_elements if element.is_displayed()]
+        print(f"Visible elements count: {len(visible_elements)}")
+
+

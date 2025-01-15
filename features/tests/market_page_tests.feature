@@ -19,5 +19,12 @@ Feature: Market page test cases
     Then Click on Developers filter at the top of the page
     Then Verify all cards has the license tag
 
+  Scenario:User can open market tab and add company option
+    Then Verify Market page opens
+    Then Click on “Add Company” button
+    Then Verify the Add Company page opens
+    Then Verify the button “Publish my company” is available
+
+
 
 

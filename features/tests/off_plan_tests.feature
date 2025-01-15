@@ -37,5 +37,4 @@ Feature: Tests for Off-plan page
   Scenario:User can open product detail and see three options of visualization
     Then Click on the first product
     Then Verify the one of the three options of visualization are architecture, interior, lobby
-
     Then Verify the visualization options are clickable
